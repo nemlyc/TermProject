@@ -50,13 +50,6 @@ namespace Assets.Scripts
             }
         }
 
-        private void OnGUI() {
-            if(GUI.Button(new Rect(100,100,100,40), "send")) {
-                byte[] dgram = Encoding.UTF8.GetBytes("hello");
-                _client.Send(dgram, dgram.Length);
-            }
-        }
-
         IEnumerator WaitTello()
         {
             _canControl = false;
