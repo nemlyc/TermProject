@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Assets.Scripts
 {
@@ -19,6 +20,9 @@ namespace Assets.Scripts
         private Thread thread;
 
         public Image image;
+
+        byte[] data;
+        bool isRecieved = false;
 
         private void Start()
         {
@@ -35,7 +39,11 @@ namespace Assets.Scripts
 
         private void Update()
         {
-            
+            //受信を監視し、受信したときに画像を表示するようにする。
+            if (isRecieved) {
+                DisplayOperation(data);
+                isRecieved = false;
+            }
         }
 
         private void ThreadMethod()
@@ -43,11 +51,8 @@ namespace Assets.Scripts
             while (true)
             {
                 IPEndPoint remoteEP = null;
-                byte[] data = udp.Receive(ref remoteEP);
-                if (data != null)
-                {
-                    DisplayOperation(data);
-                }
+                data = udp.Receive(ref remoteEP);
+                isRecieved = true;
             }
         }
 
