@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class Client:MonoBehaviour
+    public class Client : MonoBehaviour
     {
         public string host = "133.14.195.193";
         public int port = 3333;
@@ -20,7 +20,7 @@ namespace Assets.Scripts
         public TMP_Text waitTimeText;
         private UdpClient _client;
         private bool _canControl;
-        
+
         // 定数の事前定義
         const string UP = "up";
         const string DOWN = "down";
@@ -30,11 +30,13 @@ namespace Assets.Scripts
         const string LEFT = "left";
         const string TURN_RIGHT = "turn_right";
         const string TURN_LEFT = "turn_left";
+        const string PHOTO = "photo";
 
         const int MOVE_VALUE = 10;//ここがよくわからないので数値にしてあるけど、telloの規格に合わせて決め打ちしていい。
 
 
-        private void Start() {
+        private void Start()
+        {
             _client = new UdpClient();
             _client.Connect(host, port);
             _canControl = true;
@@ -43,15 +45,18 @@ namespace Assets.Scripts
                 waitTimeText = GameObject.Find("WaitTime").GetComponent<TMP_Text>();
             }
         }
-        private void Update() {
+        private void Update()
+        {
             if (_canControl)
             {
                 IdentifyInputkey();
             }
         }
 
-        private void OnGUI() {
-            if(GUI.Button(new Rect(100,100,100,40), "send")) {
+        private void OnGUI()
+        {
+            if (GUI.Button(new Rect(100, 100, 100, 40), "send"))
+            {
                 byte[] dgram = Encoding.UTF8.GetBytes("hello");
                 _client.Send(dgram, dgram.Length);
             }
@@ -60,61 +65,67 @@ namespace Assets.Scripts
         IEnumerator WaitTello()
         {
             _canControl = false;
-            for (int i = 0; i < TELLO_WAITING_TIME; i++)
-            {
-                int waitSeconds = TELLO_WAITING_TIME - 1;
-                waitTimeText.text = "Wait for : " + (waitSeconds - i) + " seconds";
-                yield return new WaitForSeconds(1);
-            }
-            waitTimeText.text = "";
+            // for (int i = 0; i < TELLO_WAITING_TIME; i++)
+            // {
+            //     int waitSeconds = TELLO_WAITING_TIME - 1;
+            //     waitTimeText.text = "Wait for : " + (waitSeconds - i) + " seconds";
+            //     yield return new WaitForSeconds(1);
+            // }
+            // waitTimeText.text = "";
+            yield return new WaitForSeconds(5);
             _canControl = true;
         }
 
-        private void InputOperation(string commandName)
+        public void InputOperation(string commandName, int commandValue)
         {
-            string json = EncodeToJson(commandName, MOVE_VALUE);
+            Debug.Log("commandName:" + commandName + " commandValue:" + commandValue);
+            string json = EncodeToJson(commandName, commandValue);
             byte[] operation = Encoding.UTF8.GetBytes(json);
-            _client.Send(operation, operation.Length);
+            // _client.Send(operation, operation.Length);
 
-            StartCoroutine(WaitTello());
+            // StartCoroutine(WaitTello());
         }
-        
-        private void IdentifyInputkey() {
-            if (Input.anyKeyDown) {
+
+        private void IdentifyInputkey()
+        {
+            if (Input.anyKeyDown)
+            {
                 // 入力があったキーをcodeに代入
-                foreach(KeyCode code in Input.inputString) {
+                foreach (KeyCode code in Input.inputString)
+                {
                     //codeがcaseの値に一致する場合
-                    switch (code) {
+                    switch (code)
+                    {
                         case KeyCode.W:
-                            InputOperation(FRONT);
+                            InputOperation(FRONT, 1);
                             Debug.Log("前進！" + EncodeToJson(FRONT, MOVE_VALUE));
                             break;
                         case KeyCode.S:
-                            InputOperation(BACK);
+                            InputOperation(BACK, 1);
                             Debug.Log("後退！" + EncodeToJson(BACK, MOVE_VALUE));
                             break;
                         case KeyCode.D:
-                            InputOperation(RIGHT);
+                            InputOperation(RIGHT, 1);
                             Debug.Log("右へ！" + EncodeToJson(RIGHT, MOVE_VALUE));
                             break;
                         case KeyCode.A:
-                            InputOperation(LEFT);
+                            InputOperation(LEFT, 1);
                             Debug.Log("左へ！" + EncodeToJson(LEFT, MOVE_VALUE));
                             break;
                         case KeyCode.Alpha8:
-                            InputOperation(UP);
+                            InputOperation(UP, 1);
                             Debug.Log("上昇！" + EncodeToJson(UP, MOVE_VALUE));
                             break;
                         case KeyCode.Alpha2:
-                            InputOperation(DOWN);
+                            InputOperation(DOWN, 1);
                             Debug.Log("下降！" + EncodeToJson(DOWN, MOVE_VALUE));
                             break;
                         case KeyCode.Alpha4:
-                            InputOperation(TURN_RIGHT);
+                            InputOperation(TURN_RIGHT, 1);
                             Debug.Log("右回転！" + EncodeToJson(TURN_RIGHT, MOVE_VALUE));
                             break;
                         case KeyCode.Alpha6:
-                            InputOperation(TURN_LEFT);
+                            InputOperation(TURN_LEFT, 1);
                             Debug.Log("左回転！" + EncodeToJson(TURN_LEFT, MOVE_VALUE));
                             break;
                     }
@@ -122,12 +133,14 @@ namespace Assets.Scripts
             }
         }
 
-        string EncodeToJson(string commandName, int value) {
+        string EncodeToJson(string commandName, int value)
+        {
             var command = new ControlCommand { commandName = commandName, value = value };
             var json = JsonUtility.ToJson(command);
             return json;
         }
-        private void OnApplicationQuit() {
+        private void OnApplicationQuit()
+        {
             _client.Close();
         }
     }
