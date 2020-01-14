@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -9,12 +10,13 @@ using System.Threading.Tasks;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
     public class Client:MonoBehaviour
     {
-        public string host = "133.14.195.193";
+        public string host;
         public int port = 3333;
         private const int TELLO_WAITING_TIME = 5;
         public TMP_Text waitTimeText;
@@ -49,7 +51,10 @@ namespace Assets.Scripts
                 IdentifyInputkey();
             }
         }
-
+        /// <summary>
+        /// telloの操作インターバル間操作を行わないようにするためのコルーチン
+        /// </summary>
+        /// <returns></returns>
         IEnumerator WaitTello()
         {
             _canControl = false;
@@ -63,6 +68,10 @@ namespace Assets.Scripts
             _canControl = true;
         }
 
+        /// <summary>
+        /// udpレシーバーへの送信の一連の流れを行う。
+        /// </summary>
+        /// <param name="commandName">送信を行うコマンドの名前</param>
         private void InputOperation(string commandName)
         {
             string json = EncodeToJson(commandName, MOVE_VALUE);
@@ -72,6 +81,9 @@ namespace Assets.Scripts
             StartCoroutine(WaitTello());
         }
         
+        /// <summary>
+        /// 入力されたキーの判別を行う。
+        /// </summary>
         private void IdentifyInputkey() {
             if (Input.anyKeyDown) {
                 // 入力があったキーをcodeに代入
@@ -115,11 +127,29 @@ namespace Assets.Scripts
             }
         }
 
+        /// <summary>
+        /// telloの操作のためのjsonに変換を行うクラス。
+        /// </summary>
+        /// <param name="commandName">up, downなどのワード</param>
+        /// <param name="value">操作するための値を設定</param>
+        /// <returns></returns>
         string EncodeToJson(string commandName, int value) {
             var command = new ControlCommand { commandName = commandName, value = value };
             var json = JsonUtility.ToJson(command);
             return json;
         }
+
+        /// <summary>
+        /// 画像送信のテスト用メソッド。ボタンで呼び出します。
+        /// </summary>
+        public void sendImage() {
+            var binary = File.ReadAllBytes("Assets/Resources/item_image.png");
+            Debug.Log(binary.Length);
+            _client.Send(binary, binary.Length);
+
+            StartCoroutine(WaitTello());
+        }
+
         private void OnApplicationQuit() {
             _client.Close();
         }
