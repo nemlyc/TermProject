@@ -14,8 +14,6 @@ namespace Assets.Scripts
         Client client;
         //コントロール管理クラス
         CommandManager commandManager;
-        Slider upDownSlider;
-        Slider waitSlider;
         public TMP_Text waitTimeText;
         private int CurrentAltitude;
         private const int TELLO_WAITING_TIME = 5;
@@ -37,8 +35,6 @@ namespace Assets.Scripts
             client = new Client();
             //コントロール管理クラスの生成（シングルトン）
             commandManager = CommandManager.getInstance();
-            // スライダーを取得する
-            upDownSlider = GameObject.Find("UpDownSlider").GetComponent<Slider>();
             //待機時間テキストの取得
             if (waitTimeText == null)
             {
@@ -90,22 +86,15 @@ namespace Assets.Scripts
             Debug.Log("左旋回ボタンクリック検知");
             Command(LEFT, 1);
         }
-        public void upDownSliderEvent()
+        public void upButtonEvent()
         {
-            Debug.Log("上下スライダーの検知");
-            Debug.Log("現在の高度：" + CurrentAltitude + "  スライダー数値：" + upDownSlider.value);
-            int altitude = CurrentAltitude - (int)upDownSlider.value;
-            if (altitude < 0)
-            {
-                // 上昇
-                Command(UP, altitude);
-            }
-            else if (altitude > 0)
-            {
-                // 下降
-                Command(DOWN, altitude);
-            }
-            CurrentAltitude = (int)upDownSlider.value;
+            Debug.Log("上昇ボタンクリック検知");
+            Command(UP, 20);
+        }
+        public void downButtonEvent()
+        {
+            Debug.Log("下降ボタンクリック検知");
+            Command(DOWN, 20);
         }
         public void leftRollButtonEvent()
         {
