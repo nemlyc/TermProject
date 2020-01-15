@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6c3052bfbde0543b75120bd7543467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LOCAL_PORT: 3333
+  LOCAL_PORT: 55555
   image: {fileID: 0}
 --- !u!4 &9797690
 Transform:
@@ -3330,8 +3330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccessIP: 192.168.2.172
-  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!4 &2055829271
 Transform:

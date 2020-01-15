@@ -5,7 +5,7 @@ using UnityEngine;
 public class MetaSettings : MonoBehaviour
 {
     public static string AccessIPAddress;
-    public static string AccessPort;
+    public static int AccessPort;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class MetaSettings : MonoBehaviour
     public static string getIPAddress() {
         return AccessIPAddress;
     }
-    public static string getPortNumber() {
+    public static int getPortNumber() {
         return AccessPort;
     }
 

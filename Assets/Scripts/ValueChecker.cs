@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ValueChecker : MonoBehaviour
 {
     [SerializeField]
     private TMP_InputField ip_inputField;
     [SerializeField]
-    private TMP_InputField port_inputField;
+    private InputField port_inputField;
 
     [SerializeField]
     private TMP_Text ipAddress;
     [SerializeField]
-    private TMP_Text portNumber;
+    private Text portNumber;
     [SerializeField]
     private TMP_Text error;
 
@@ -25,10 +26,10 @@ public class ValueChecker : MonoBehaviour
     void Start()
     {
         ip_inputField = ip_inputField.GetComponent<TMP_InputField>();
-        port_inputField = port_inputField.GetComponent<TMP_InputField>();
+        port_inputField = port_inputField.GetComponent<InputField>();
 
         ipAddress = ipAddress.GetComponent<TMP_Text>();
-        portNumber = portNumber.GetComponent<TMP_Text>();
+        portNumber = portNumber.GetComponent<Text>();
         error = error.GetComponent<TMP_Text>();
     }
 
@@ -40,13 +41,19 @@ public class ValueChecker : MonoBehaviour
     public void InputIPAddress() {
         ipAddress.text = ip_inputField.text;
         MetaSettings.AccessIPAddress = ipAddress.text;
+        PlayerPrefs.SetString("IP", ipAddress.text);
     }
     public void InputPortNumber() {
         portNumber.text = port_inputField.text;
-        MetaSettings.AccessPort = portNumber.text;
+        MetaSettings.AccessPort = int.Parse(portNumber.text);
+        var intNum = int.Parse(portNumber.text);
+        Debug.Log(intNum);
+        PlayerPrefs.SetInt("Port", int.Parse(portNumber.text));
     }
     public void OnClick() {
         if (MetaSettings.AccessIPAddress != null && MetaSettings.AccessPort != null) {
+            MetaSettings.AccessIPAddress = ipAddress.text;
+            MetaSettings.AccessPort = int.Parse(portNumber.text);
             SceneManager.LoadScene(ControllerScene);
         } else {
             error.text = ErrorMessage;

@@ -17,7 +17,7 @@ namespace Assets.Scripts
     public class Client : MonoBehaviour
     {
         public string host;
-        public int port = 55555;
+        public int port;
         private const int TELLO_WAITING_TIME = 5;
         public TMP_Text waitTimeText;
         private UdpClient _client;
@@ -36,9 +36,10 @@ namespace Assets.Scripts
 
         const int MOVE_VALUE = 10;//ここがよくわからないので数値にしてあるけど、telloの規格に合わせて決め打ちしていい。
 
-
         private void Start()
         {
+            host = MetaSettings.AccessIPAddress;
+            port = MetaSettings.AccessPort;
             _client = new UdpClient();
             _client.Connect(host, port);
             _canControl = true;
@@ -46,6 +47,12 @@ namespace Assets.Scripts
             {
                 waitTimeText = GameObject.Find("WaitTime").GetComponent<TMP_Text>();
             }
+        }
+        public void Connection() {
+            host = PlayerPrefs.GetString("IP");
+            port = PlayerPrefs.GetInt("Port");
+            _client = new UdpClient();
+            _client.Connect(host, port);
         }
         private void Update()
         {

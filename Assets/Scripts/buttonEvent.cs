@@ -33,6 +33,9 @@ namespace Assets.Scripts
         {
             //Clientクラスの生成
             client = new Client();
+            Debug.Log(PlayerPrefs.GetString("IP") + "に接続しました。ポート: " + PlayerPrefs.GetInt("Port"));
+            client.Connection();
+            
             //コントロール管理クラスの生成（シングルトン）
             commandManager = CommandManager.getInstance();
             //待機時間テキストの取得
