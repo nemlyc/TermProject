@@ -15,7 +15,7 @@ namespace Assets.Scripts
 {
     class Server:MonoBehaviour
     {
-        public int LOCAL_PORT = 3333;
+        public int LOCAL_PORT = 55555;
         private static UdpClient udp;
         private Thread thread;
 
