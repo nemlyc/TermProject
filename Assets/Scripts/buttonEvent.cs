@@ -10,8 +10,6 @@ namespace Assets.Scripts
 
     public class buttonEvent : MonoBehaviour
     {
-        public string AccessIP = "192.168.2.172";
-        public int AccessPort = 55555;
         //クラインアントクラス
         Client client;
         //コントロール管理クラス
@@ -35,8 +33,6 @@ namespace Assets.Scripts
         {
             //Clientクラスの生成
             client = new Client();
-            client.host = AccessIP;
-            client.port = AccessPort;
             //コントロール管理クラスの生成（シングルトン）
             commandManager = CommandManager.getInstance();
             //待機時間テキストの取得
