@@ -78,7 +78,7 @@ namespace Assets.Scripts
         /// udpレシーバーへの送信の一連の流れを行う。
         /// </summary>
         /// <param name="commandName">送信を行うコマンドの名前</param>
-        private void InputOperation(string commandName)
+        public void InputOperation(string commandName, int commandValue)
         {
             Debug.Log("commandName:" + commandName + " commandValue:" + commandValue);
             string json = EncodeToJson(commandName, commandValue);
