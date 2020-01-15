@@ -374,6 +374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &299738558
 GameObject:
@@ -698,6 +700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &618224707
 GameObject:
@@ -841,6 +845,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &667250798
 GameObject:
@@ -1300,6 +1306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &895047738
 GameObject:
@@ -1583,6 +1591,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &1078600137
 GameObject:
@@ -1636,6 +1646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!114 &1078600140
 MonoBehaviour:
@@ -1998,7 +2010,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1116, y: 477}
+  m_SizeDelta: {x: 1116, y: 454}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348183379
 MonoBehaviour:
@@ -2789,6 +2801,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!114 &1798598398
 MonoBehaviour:
@@ -3022,6 +3036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &1868131037
 GameObject:
@@ -3165,6 +3181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e881a5d88db9f940a12bb0f5a93472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AccessIP: 192.168.2.172
+  AccessPort: 55555
   waitTimeText: {fileID: 0}
 --- !u!1 &1912160741
 GameObject:
