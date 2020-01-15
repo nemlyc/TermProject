@@ -39,7 +39,6 @@ namespace Assets.Scripts
             commandManager = CommandManager.getInstance();
             // スライダーを取得する
             upDownSlider = GameObject.Find("UpDownSlider").GetComponent<Slider>();
-            waitSlider = GameObject.Find("WatingSlider").GetComponent<Slider>();
             //待機時間テキストの取得
             if (waitTimeText == null)
             {
@@ -63,10 +62,10 @@ namespace Assets.Scripts
             for (int i = 0; i < TELLO_WAITING_TIME; i++)
             {
                 int waitSeconds = TELLO_WAITING_TIME - 1;
-                waitTimeText.text = "Wait for : " + (waitSeconds - i) + " seconds";
+                waitTimeText.text = "Wait (" + (waitSeconds - i) + ")";
                 yield return new WaitForSeconds(1);
             }
-            waitTimeText.text = "";
+            waitTimeText.text = "Active";
             CommandManager.ChangeControl(true);
         }
 
