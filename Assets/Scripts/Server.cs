@@ -32,7 +32,6 @@ namespace Assets.Scripts
             }
             
             udp = new UdpClient(LOCAL_PORT);
-            udp.Client.ReceiveTimeout = 100000;
             thread = new Thread(new ThreadStart(ThreadMethod));
             thread.Start();
         }
@@ -89,6 +88,9 @@ namespace Assets.Scripts
         {
             var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
             image.sprite = sprite;
+        }
+        private void OnApplicationQuit() {
+            udp.Close();
         }
     }
 }
