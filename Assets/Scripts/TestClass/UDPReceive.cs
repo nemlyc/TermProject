@@ -13,12 +13,12 @@ namespace Assets.Scripts.TestClass
 {
     class UDPReceive:MonoBehaviour
     {
-        int LOCA_LPORT = 3333;
+        public int LOCAL_PORT = 3333;
         static UdpClient udp;
         Thread thread;
 
         private void Start() {
-            udp = new UdpClient(LOCA_LPORT);
+            udp = new UdpClient(LOCAL_PORT);
             udp.Client.ReceiveTimeout = 100000;
             thread = new Thread(new ThreadStart(ThreadMethod));
             thread.Start();
@@ -35,7 +35,7 @@ namespace Assets.Scripts.TestClass
             while (true) {
                 IPEndPoint remoteEP = null;
                 byte[] data = udp.Receive(ref remoteEP);
-                string text = Encoding.UTF8.GetString(data);//ここutf8でいけるのかしら。
+                string text = Encoding.UTF8.GetString(data);
                 Debug.Log(text);
             }
         }
