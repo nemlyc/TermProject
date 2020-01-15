@@ -17,7 +17,7 @@ namespace Assets.Scripts
     public class Client : MonoBehaviour
     {
         public string host;
-        public int port = 3333;
+        public int port = 55555;
         private const int TELLO_WAITING_TIME = 5;
         public TMP_Text waitTimeText;
         private UdpClient _client;
