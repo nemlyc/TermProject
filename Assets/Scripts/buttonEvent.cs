@@ -29,7 +29,7 @@ namespace Assets.Scripts
         const string TURN_RIGHT = "turn_right";
         const string TURN_LEFT = "turn_left";
         const string PHOTO = "photo";
-        const string RAND = "rand";
+        const string LAND = "land";
 
         // Start is called before the first frame update
         void Start()
@@ -119,7 +119,7 @@ namespace Assets.Scripts
         public void RandButtonEvent()
         {
             Debug.Log("着陸ボタンクリック検知");
-            Command(RAND,1);
+            Command(LAND,1);
         }
     }
 
