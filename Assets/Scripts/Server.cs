@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -63,9 +64,11 @@ namespace Assets.Scripts
         /// <param name="binaryData"></param>
         public void DisplayOperation(byte[] binaryData)
         {
-            var texture = ReadImageBinary(binaryData);
-            LoadCapturedImage(texture);
-            
+            if (false)
+            {
+                var texture = ReadImageBinary(binaryData);
+                LoadCapturedImage(texture);
+            }
         }
         
 
@@ -91,6 +94,15 @@ namespace Assets.Scripts
             var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
             image.sprite = sprite;
         }
+
+        private bool IsImageBinary(byte[] binary)
+        {
+            var reg = new Regex("/^\xFF\xD8/");
+            var bin = reg.IsMatch(Encoding.UTF8.GetString(binary));
+            Debug.Log(Encoding.UTF8.GetString(binary));
+            return true;
+        }
+        
         private void OnApplicationQuit() {
             udp.Close();
         }
