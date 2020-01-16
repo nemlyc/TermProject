@@ -55,6 +55,12 @@ namespace Assets.Scripts
             }
         }
 
+        public void Connection()
+        {
+            _client = new UdpClient();
+            _client.Connect(host, port);
+        }
+
         /// <summary>
         /// telloの操作インターバル間操作を行わないようにするためのコルーチン
         /// </summary>
@@ -83,9 +89,9 @@ namespace Assets.Scripts
             Debug.Log("commandName:" + commandName + " commandValue:" + commandValue);
             string json = EncodeToJson(commandName, commandValue);
             byte[] operation = Encoding.UTF8.GetBytes(json);
-            // _client.Send(operation, operation.Length);
+             _client.Send(operation, operation.Length);
 
-            // StartCoroutine(WaitTello());
+            //StartCoroutine(WaitTello());
         }
         
         /// <summary>
