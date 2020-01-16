@@ -30,6 +30,7 @@ namespace Assets.Scripts
             {
                 image = GameObject.Find("Image").GetComponent<Image>();
             }
+            Debug.Log("ポート : " + LOCAL_PORT + "を開放しました。");
             
             udp = new UdpClient(LOCAL_PORT);
             thread = new Thread(new ThreadStart(ThreadMethod));
@@ -52,6 +53,7 @@ namespace Assets.Scripts
                 IPEndPoint remoteEP = null;
                 data = udp.Receive(ref remoteEP);
                 isRecieved = true;
+                Debug.Log("受信した : " + Encoding.UTF8.GetString(data));
             }
         }
 
