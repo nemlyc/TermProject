@@ -10,8 +10,8 @@ namespace Assets.Scripts
 
     public class buttonEvent : MonoBehaviour
     {
-        public string AccessIP = "192.168.2.172";
-        public int AccessPort = 55555;
+        public string AccessIP;
+        public int AccessPort;
         //クラインアントクラス
         Client client;
         //コントロール管理クラス
@@ -29,12 +29,13 @@ namespace Assets.Scripts
         const string TURN_RIGHT = "turn_right";
         const string TURN_LEFT = "turn_left";
         const string PHOTO = "photo";
+        const string LAND = "land";
 
         // Start is called before the first frame update
         void Start()
         {
             //Clientクラスの生成
-            client = new Client();
+            client = gameObject.AddComponent<Client>();
             client.host = AccessIP;
             client.port = AccessPort;
             //コントロール管理クラスの生成（シングルトン）
@@ -114,6 +115,11 @@ namespace Assets.Scripts
         {
             Debug.Log("撮影ボタンクリック検知");
             Command(PHOTO, 1);
+        }
+        public void RandButtonEvent()
+        {
+            Debug.Log("着陸ボタンクリック検知");
+            Command(LAND,1);
         }
     }
 
